@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">notesApp</string>
+    <string name="delete">Удалить</string>
+    <string name="save">Сохранить</string>
+    <string name="enter_title">Введите заголовок</string>
+    <string name="enter_content">Введите описание</string>
+    <string name="view_edit_note">Просмотреть/Удалить заметку</string>
+    <string name="create_note">Создать заметку</string>
+    <string name="title">Заголовок</string>
+    <string name="description">Описание</string>
+</resources>

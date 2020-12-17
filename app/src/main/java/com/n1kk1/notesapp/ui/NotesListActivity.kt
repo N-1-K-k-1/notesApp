@@ -1,8 +1,10 @@
 package com.n1kk1.notesapp.ui
 
+import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -43,6 +45,25 @@ class NotesListActivity : AppCompatActivity(), NotesListAdapter.Callbacks {
             val intent = Intent(this, EditNoteActivity::class.java)
             intent.putExtra("mode", 1)
             startActivity(intent)
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (resultCode == Activity.RESULT_OK) {
+            val note = data?.getParcelableExtra<Note>("note")!!
+            val mode = data.getIntExtra("mode", 1)
+
+            Log.e("note", note.toString())
+            Log.e("mode", mode.toString())
+
+            if (mode == 1) {
+                viewModel.saveNote(note)
+            }
+            else if (mode == 2) {
+                viewModel.updateNote(note)
+            }
         }
     }
 

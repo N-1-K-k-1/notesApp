@@ -43,6 +43,7 @@ class NotesListAdapter(callbacks: Callbacks) : RecyclerView.Adapter<NotesListAda
             itemView.note_delete.setOnClickListener {
                 itemClickListener.onDeleteClicked(note)
             }
+
         }
     }
 

@@ -43,8 +43,7 @@ class NotesListActivity : AppCompatActivity(), NotesListAdapter.Callbacks {
 
         add_note.setOnClickListener {
             val intent = Intent(this, EditNoteActivity::class.java)
-            intent.putExtra("mode", 1)
-            startActivity(intent)
+            startActivityForResult(intent, 1)
         }
     }
 
@@ -53,25 +52,21 @@ class NotesListActivity : AppCompatActivity(), NotesListAdapter.Callbacks {
 
         if (resultCode == Activity.RESULT_OK) {
             val note = data?.getParcelableExtra<Note>("note")!!
-            val mode = data.getIntExtra("mode", 1)
 
-            Log.e("note", note.toString())
-            Log.e("mode", mode.toString())
-
-            if (mode == 1) {
+            // 1 — Save request code, 2 — update request code
+            if (requestCode == 1) {
                 viewModel.saveNote(note)
             }
-            else if (mode == 2) {
-                viewModel.updateNote(note)
+            else if (requestCode == 2) {
+               viewModel.updateNote(note)
             }
         }
     }
 
     override fun onItemClicked(note: Note) {
         val intent = Intent(this, EditNoteActivity::class.java)
-        intent.putExtra("mode", 2)
         intent.putExtra("note", note)
-        startActivity(intent)
+        startActivityForResult(intent, 2)
     }
 
     override fun onDeleteClicked(note: Note) {

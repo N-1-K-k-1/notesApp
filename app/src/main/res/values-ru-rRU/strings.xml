@@ -9,4 +9,6 @@
     <string name="create_note">Создать заметку</string>
     <string name="title">Заголовок</string>
     <string name="description">Описание</string>
+    <string name="your_notes">Ваши заметки</string>
+    <string name="no_notes">Вы не добавили ни одной заметки</string>
 </resources>

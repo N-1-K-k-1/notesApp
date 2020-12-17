@@ -40,7 +40,7 @@
                 tools:text="@string/title" />
 
             <TextView
-                android:id="@+id/note_content"
+                android:id="@+id/note_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"

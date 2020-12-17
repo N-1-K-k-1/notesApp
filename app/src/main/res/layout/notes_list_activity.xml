@@ -13,11 +13,34 @@
         tools:listitem="@layout/note" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab_new_todo"
+        android:id="@+id/add_note"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="16dp"
         app:srcCompat="@android:drawable/ic_input_add" />
+
+    <RelativeLayout
+        android:id="@+id/no_notes"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="100dp"
+        android:visibility="invisible"
+        android:alpha="0.5">
+        <ImageView
+            android:id="@+id/noteImage"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_centerInParent="true"
+            android:contentDescription="@string/no_notes"
+            android:src="@drawable/ic_baseline_notes_24" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/noteImage"
+            android:gravity="center_horizontal"
+            android:text="@string/no_notes"
+            android:textSize="20sp"/>
+    </RelativeLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

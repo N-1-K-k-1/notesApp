@@ -3,7 +3,7 @@
 [![API](https://img.shields.io/badge/API-21%2B-brightgreen.svg?style=plastic)](https://android-arsenal.com/api?level=21)
 [![License: MIT](https://img.shields.io/badge/License-MIT-red.svg)](https://opensource.org/licenses/MIT)
 
- notesApp is an ordinary app where you can create/view/edit/delete notes. It is designed according to MVVM architectural pattern. 
+ notesApp is an ordinary app where you can create/view/edit/delete notes. It follows the MVVM architectural pattern. 
  
  <a name="tasks"></a>
 ## Assigned tasks

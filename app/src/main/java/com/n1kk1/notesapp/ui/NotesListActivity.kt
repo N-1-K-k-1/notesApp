@@ -4,14 +4,15 @@ import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.n1kk1.notesapp.R
 import com.n1kk1.notesapp.model.Note
+import com.n1kk1.notesapp.utils.SwipeToDeleteCallback
 import kotlinx.android.synthetic.main.notes_list_activity.*
 
 class NotesListActivity : AppCompatActivity(), NotesListAdapter.Callbacks {
@@ -25,21 +26,23 @@ class NotesListActivity : AppCompatActivity(), NotesListAdapter.Callbacks {
 
         title = getString(R.string.your_notes)
 
-        note_list.setHasFixedSize(true)
         note_list.layoutManager = LinearLayoutManager(this)
         adapter = NotesListAdapter(this)
         note_list.adapter= adapter
 
         viewModel = ViewModelProvider(this).get(NoteViewModel::class.java)
         viewModel.getAllNotes().observe(this, Observer {
-            if (it.isEmpty())
-                no_notes.visibility = View.VISIBLE
-            else {
+
                 no_notes.visibility = View.INVISIBLE
                 adapter.setItems(it)
-            }
+
         })
 
+        ItemTouchHelper(object : SwipeToDeleteCallback(this) {
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                viewModel.deleteNote(adapter.getItemAt(viewHolder.adapterPosition))
+            }
+        }).attachToRecyclerView(note_list)
 
         add_note.setOnClickListener {
             val intent = Intent(this, EditNoteActivity::class.java)
@@ -67,9 +70,5 @@ class NotesListActivity : AppCompatActivity(), NotesListAdapter.Callbacks {
         val intent = Intent(this, EditNoteActivity::class.java)
         intent.putExtra("note", note)
         startActivityForResult(intent, 2)
-    }
-
-    override fun onDeleteClicked(note: Note) {
-        viewModel.deleteNote(note)
     }
 }

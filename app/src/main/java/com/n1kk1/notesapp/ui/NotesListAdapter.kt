@@ -30,6 +30,10 @@ class NotesListAdapter(callbacks: Callbacks) : RecyclerView.Adapter<NotesListAda
         notifyDataSetChanged()
     }
 
+    fun getItemAt(position: Int): Note {
+        return items[position]
+    }
+
     inner class ViewHolder(itemView: View)  : RecyclerView.ViewHolder(itemView) {
 
         fun bind(note: Note) {
@@ -40,16 +44,11 @@ class NotesListAdapter(callbacks: Callbacks) : RecyclerView.Adapter<NotesListAda
                 itemClickListener.onItemClicked(note)
             }
 
-            itemView.note_delete.setOnClickListener {
-                itemClickListener.onDeleteClicked(note)
-            }
-
         }
     }
 
     interface Callbacks {
         fun onItemClicked(note: Note)
-        fun onDeleteClicked(note: Note)
     }
 
 }

@@ -27,15 +27,15 @@ class NotesListActivity : AppCompatActivity(), NotesListAdapter.Callbacks {
         title = getString(R.string.your_notes)
 
         note_list.layoutManager = LinearLayoutManager(this)
-        adapter = NotesListAdapter(this)
+        adapter = NotesListAdapter(itemClicked = {note -> onItemClicked(note)})
         note_list.adapter= adapter
 
         viewModel = ViewModelProvider(this).get(NoteViewModel::class.java)
         viewModel.getAllNotes().observe(this, Observer {
-
-                no_notes.visibility = View.INVISIBLE
-                adapter.setItems(it)
-
+            no_notes.visibility = View.INVISIBLE
+            adapter.setItems(it)
+            if (it.isEmpty())
+                no_notes.visibility = View.VISIBLE
         })
 
         ItemTouchHelper(object : SwipeToDeleteCallback(this) {
